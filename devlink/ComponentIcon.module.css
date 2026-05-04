@@ -1,0 +1,94 @@
+.button_icon {
+  display: inline-flex;
+  width: 25px;
+  height: 25px;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+
+  color: var(--_apps---colors--primary-foreground-dark\<deleted\|variable-a34b6cd4-ec6d-67fa-f378-a1e1a2592ce2\>);
+}
+
+.button_icon.is-secondary {
+  color: inherit;
+}
+
+@media screen and (max-width: 767px) {
+  .button_icon.is-secondary {
+    color: inherit;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .button_icon.is-secondary:hover {
+    color: inherit;
+  }
+}
+
+.button_icon.is-secondary.is-hidden {
+  display: none;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide {
+  display: block;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-19786a29-f9f7-10be-b391-07e42004b0d2) {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-d6d7dccb-1708-18f6-c76d-5fa5d2e455bd) {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-04a49676-1b62-c1eb-d393-5ae373e3c2a6) {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-e71522b7-4640-e2a2-4e30-754240250375) {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-53e0eb82-d617-fb55-dd92-76d211673029) {
+  display: none;
+}
+
+.button_icon.icon-flower.compoent-show-hide:where(.w-variant-1fec32ce-ab02-343e-940b-abec867c2a05) {
+  display: none;
+}
+
+.compoent-show-hide {
+  display: none;
+}
+
+.button_icon.icon-book.compoent-show-hide:where(.w-variant-19786a29-f9f7-10be-b391-07e42004b0d2) {
+  display: block;
+}
+
+.button_icon.icon-book.compoent-show-hide:where(.w-variant-d6d7dccb-1708-18f6-c76d-5fa5d2e455bd) {
+  display: none;
+}
+
+.button_icon.icon-heart {
+  color: inherit;
+}
+
+.button_icon.icon-heart.compoent-show-hide:where(.w-variant-d6d7dccb-1708-18f6-c76d-5fa5d2e455bd) {
+  display: block;
+}
+
+.button_icon.icon-location.compoent-show-hide:where(.w-variant-1fec32ce-ab02-343e-940b-abec867c2a05) {
+  display: block;
+}
+
+.button_icon.icon-person.compoent-show-hide:where(.w-variant-53e0eb82-d617-fb55-dd92-76d211673029) {
+  display: block;
+}
+
+.button_icon.icon-orange-half.compoent-show-hide:where(.w-variant-04a49676-1b62-c1eb-d393-5ae373e3c2a6) {
+  display: block;
+}

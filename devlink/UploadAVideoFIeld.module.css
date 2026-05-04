@@ -1,0 +1,167 @@
+.form_input-background {
+  position: relative;
+  z-index: 9;
+
+  display: flex;
+  width: 180px;
+  height: 200px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-self: stretch;
+
+  border: 1px solid var(--_colors---core-accent-color--accent-primary);
+  border-radius: 5px;
+
+  background-color: var(--_colors---core-neutral-color--neutral-primary);
+
+  transition: background-color 400ms ease,color 400ms ease,border-width 400ms ease,border-color 400ms ease,border 400ms ease;
+
+  color: var(--_colors---core-accent-color--accent-primary);
+}
+
+.form_input-background:hover {
+  border-width: 1px;
+  border-color: var(--_colors---core-accent-color--accent-secondary);
+  color: var(--_colors---core-accent-color--accent-secondary);
+}
+
+.form_input-background:active {
+  background-color: var(--_colors---core-color-tint--accent-primary-a10);
+}
+
+@media screen and (max-width: 991px) {
+  .form_input-background {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form_input-background {
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .form_input-background {
+    width: auto;
+    height: 175px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-self: stretch;
+  }
+}
+
+.form_input-background.is-timeline {
+  width: 150px;
+  height: 150px;
+}
+
+.form-input {
+  position: relative;
+
+  display: flex;
+  max-height: 400px;
+  max-width: 400px;
+  min-height: 300px;
+  min-width: 300px;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-self: center;
+  aspect-ratio: 1/1;
+
+  font-family: var(--_typography---font--body-font);
+  color: var(--_colors---core-accent-color--accent-primary);
+
+  object-fit: cover;
+}
+
+.form-input.is-upload {
+  max-height: 125px;
+  max-width: 125px;
+  min-height: 125px;
+  min-width: 125px;
+
+  color: inherit;
+
+  border-color: inherit;
+}
+
+.input_label {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+  width: 100%;
+  margin-bottom: 0.375rem;
+  align-self: flex-start;
+
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 300;
+  text-align: left;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.input_label.is-upload {
+  width: 60%;
+  margin-bottom: 0rem;
+  align-self: center;
+
+  font-size: 0.5rem;
+  text-align: center;
+  color: inherit;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.input_label.is-disclaimer {
+  font-size: 0.7rem;
+  text-transform: lowercase;
+}
+
+.input_label.margin-top_5pct {
+  margin-top: 5px;
+}
+
+.upload_inner-border {
+  position: relative;
+
+  align-self: center;
+
+  transition-property: border-color, border;
+  transition-duration: 400ms, 400ms;
+  transition-timing-function: ease, ease;
+
+  border-color: inherit;
+
+  color: inherit;
+}
+
+.icon-video {
+  position: relative;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+
+  display: flex;
+  width: 75px;
+  height: 75px;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+
+  border-color: inherit;
+
+  color: inherit;
+}
