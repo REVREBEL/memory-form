@@ -57,6 +57,7 @@ export function MemoryFormWrapper({
     message: string;
     itemData?: CmsItemResponse;
   }>({ type: null, message: '' });
+  const [autoCloseTimer, setAutoCloseTimer] = useState<number>(10);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const maxChars = 5000;
@@ -65,6 +66,25 @@ export function MemoryFormWrapper({
   useEffect(() => {
     console.log('🔍 MemoryFormWrapper initialized with collectionId:', collectionId);
   }, [collectionId]);
+
+  // Auto-close timer for success message
+  useEffect(() => {
+    if (submitStatus.type === 'success') {
+      setAutoCloseTimer(10);
+      const interval = setInterval(() => {
+        setAutoCloseTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            handleCloseModal();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [submitStatus.type]);
 
   // Character counter effect
   useEffect(() => {
@@ -279,41 +299,88 @@ export function MemoryFormWrapper({
   		  </DialogDescription>
           
           <div ref={containerRef} className="h-full">
-            {/* Success Message */}
+            {/* Success Message - Full Screen */}
             {submitStatus.type === 'success' && (
-              <div style={{
-                backgroundColor: 'var(--_apps---colors--background-forms)',
-                border: `1px solid var(--_apps---colors--border)`,
-                borderRadius: 'var(--_apps---sizes--radius)',
-                padding: '1rem',
-                margin: '1rem'
+              <div className="absolute inset-0 z-50 flex flex-col items-center justify-center" style={{
+                backgroundColor: '#8B0000', // Dark red color
+                color: '#FFFFFF'
               }}>
-                <p style={{ 
-                  color: 'var(--_apps---colors--foreground)',
-                  fontFamily: 'var(--_apps---typography--body-font)',
-                  fontWeight: 600
-                }}>
-                  ✓ {submitStatus.message}
-                </p>
-                {submitStatus.itemData && (
-                  <div style={{ 
-                    marginTop: '0.5rem',
-                    fontSize: '0.875rem',
-                    color: 'var(--_apps---colors--muted-foreground)',
-                    fontFamily: 'var(--_apps---typography--body-font)'
+                <div className="flex flex-col items-center justify-center gap-6 px-8 text-center flex-1">
+                  <h2 style={{ 
+                    fontSize: 'clamp(2rem, 8vw, 5rem)',
+                    fontFamily: 'var(--_apps---typography--heading-font)',
+                    fontWeight: 700,
+                    lineHeight: 1.2,
+                    marginBottom: '1rem'
                   }}>
-                    <p>Item ID: {submitStatus.itemData.id}</p>
-                    <p>Slug: {submitStatus.itemData.fieldData?.slug}</p>
-                    {submitStatus.itemData.createdOn && (
-                      <p>
-                        Created:{' '}
-                        {new Date(
-                          submitStatus.itemData.createdOn
-                        ).toLocaleString()}
-                      </p>
-                    )}
-                  </div>
-                )}
+                    Thank You!
+                  </h2>
+                  <p style={{ 
+                    fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+                    fontFamily: 'var(--_apps---typography--body-font)',
+                    fontWeight: 600,
+                    maxWidth: '800px'
+                  }}>
+                    {submitStatus.message}
+                  </p>
+                  {submitStatus.itemData && (
+                    <div style={{ 
+                      marginTop: '2rem',
+                      fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      fontFamily: 'var(--_apps---typography--body-font)',
+                      maxWidth: '600px'
+                    }}>
+                      <p style={{ marginBottom: '0.5rem' }}>Item ID: {submitStatus.itemData.id}</p>
+                      <p style={{ marginBottom: '0.5rem' }}>Slug: {submitStatus.itemData.fieldData?.slug}</p>
+                      {submitStatus.itemData.createdOn && (
+                        <p>
+                          Created:{' '}
+                          {new Date(
+                            submitStatus.itemData.createdOn
+                          ).toLocaleString()}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  <p style={{ 
+                    fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                    fontFamily: 'var(--_apps---typography--body-font)',
+                    marginTop: '2rem',
+                    color: 'rgba(255, 255, 255, 0.8)'
+                  }}>
+                    Closing in {autoCloseTimer} seconds...
+                  </p>
+                </div>
+                
+                {/* Close Button - Centered at Bottom */}
+                <div className="pb-8">
+                  <button
+                    onClick={handleCloseModal}
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      color: '#FFFFFF',
+                      border: '2px solid #FFFFFF',
+                      borderRadius: 'var(--_apps---sizes--radius)',
+                      padding: '1rem 3rem',
+                      fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                      fontFamily: 'var(--_apps---typography--button-font)',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             )}
 
@@ -394,3 +461,4 @@ export function MemoryFormWrapper({
     </DevLinkProvider>
   );
 }
+
