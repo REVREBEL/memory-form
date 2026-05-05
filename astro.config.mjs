@@ -19,6 +19,39 @@ function patchViteErrorOverlay() {
 }
 
 /**
+ * Vite plugin to completely exclude Webflow components from build
+ */
+function excludeWebflowComponents() {
+  return {
+    name: 'exclude-webflow-components',
+    resolveId(id) {
+      // Exclude any imports of Webflow* components
+      if (id.includes('/site-components/Webflow')) {
+        return {
+          id: 'virtual:webflow-stub',
+          external: false,
+        };
+      }
+    },
+    load(id) {
+      // Return empty stub for excluded components
+      if (id === 'virtual:webflow-stub') {
+        return 'export default {};';
+      }
+    },
+    transform(code, id) {
+      // Skip transformation of Webflow components entirely
+      if (id.includes('/site-components/Webflow')) {
+        return {
+          code: 'export default {};',
+          map: null,
+        };
+      }
+    },
+  };
+}
+
+/**
  * Astro integration to inject development-only scripts
  */
 function injectDevScript(options = {}) {
@@ -43,16 +76,33 @@ function injectDevScript(options = {}) {
   };
 }
 
+// Determine base path based on environment
+// In production (Webflow Cloud), use /memory-form
+// In development, use root /
+const getBasePath = () => {
+  // Check for BASE_URL env var first (can be set in .env or wrangler)
+  if (import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/') {
+    return import.meta.env.BASE_URL;
+  }
+  
+  // Default to /memory-form for production builds
+  // Use root / for development
+  if (process.env.NODE_ENV === 'production' || process.argv.includes('build')) {
+    return '/memory-form';
+  }
+  
+  return '/';
+};
+
+const basePath = getBasePath();
+
 // https://astro.build/config
 export default defineConfig({
-  // CRITICAL: Use BASE_URL environment variable provided by Webflow Cloud
-  // In production, this will be something like "/memory-journal"
-  // In local dev, this will be empty string (root)
-  base: import.meta.env.BASE_URL || '',
+  base: basePath,
   
   // Also configure assets to use the same base path
   build: {
-    assetsPrefix: import.meta.env.BASE_URL || undefined,
+    assetsPrefix: basePath !== '/' ? basePath : undefined,
   },
   
   output: 'server',
@@ -84,6 +134,10 @@ export default defineConfig({
           '**/dist/**',
           '**/node_modules/**',
           '**/src/site-components/**',
+          '**/src/site-components/Webflow*.jsx',
+          '**/src/site-components/Webflow*.js',
+          '**/src/site-components/Webflow*.tsx',
+          '**/src/site-components/Webflow*.ts',
         ],
       },
     },

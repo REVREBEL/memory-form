@@ -1,0 +1,266 @@
+---
+/**
+ * Test page for the Memory Form embed
+ * 
+ * This demonstrates the SIMPLEST possible embed usage - just:
+ * 1. Add a div with data-memory-button
+ * 2. Add the script tag
+ * 
+ * No configuration needed! Collection ID is auto-detected.
+ */
+
+// Get collection ID for testing
+const COLLECTION_ID = import.meta.env.MEMORY_JOURNAL_COLLECTION_ID;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Form Embed Test</title>
+  
+  <!-- Collection ID is injected via meta tag for auto-detection -->
+  {COLLECTION_ID && (
+    <meta name="memory-form:collection-id" content={COLLECTION_ID} />
+  )}
+  
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    
+    .demo-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #C98769;
+      padding-bottom: 0.5rem;
+    }
+    
+    h2 {
+      color: #29708d;
+      margin-top: 0;
+    }
+    
+    code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    
+    pre {
+      background: #f8f8f8;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      border-left: 4px solid #C98769;
+    }
+    
+    .success {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    
+    .info {
+      background: #d1ecf1;
+      border: 1px solid #bee5eb;
+      color: #0c5460;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+    
+    .button-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .button-demo {
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 4px;
+      text-align: center;
+    }
+    
+    .button-demo h3 {
+      margin: 0 0 1rem 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Memory Form Embed Test</h1>
+  
+  <div class="success">
+    ✅ <strong>Zero Configuration Required!</strong> The collection ID is automatically detected from the environment.
+  </div>
+  
+  <!-- DEMO 1: Simplest Usage -->
+  <div class="demo-section">
+    <h2>1. Simplest Usage (Auto-Detection)</h2>
+    <p>Just add these two elements - that's it!</p>
+    
+    <pre><code>&lt;!-- Button container --&gt;
+&lt;div data-memory-button&gt;&lt;/div&gt;
+
+&lt;!-- Embed script --&gt;
+&lt;script src="/memory-form/memory-embed.js"&gt;&lt;/script&gt;</code></pre>
+    
+    <div class="button-demo">
+      <h3>Default Button</h3>
+      <div data-memory-button></div>
+    </div>
+  </div>
+  
+  <!-- DEMO 2: Customized Buttons -->
+  <div class="demo-section">
+    <h2>2. Customized Buttons</h2>
+    <p>Add data attributes to customize the appearance:</p>
+    
+    <div class="button-showcase">
+      <div class="button-demo">
+        <h3>Ocean Teal</h3>
+        <div data-memory-button 
+          data-button-text="Share a Memory"
+          data-button-variant="Ocean Teal">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Slate Navy</h3>
+        <div data-memory-button 
+          data-button-text="Get Started"
+          data-button-variant="Slate Navy">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Warm Sandston</h3>
+        <div data-memory-button 
+          data-button-text="Submit Memory"
+          data-button-variant="Warm Sandston">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Rustwood Red</h3>
+        <div data-memory-button 
+          data-button-text="Add Your Story"
+          data-button-variant="Rustwood Red">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- DEMO 3: Multiple Buttons -->
+  <div class="demo-section">
+    <h2>3. Multiple Buttons on One Page</h2>
+    <p>You can have as many buttons as you want - the script only needs to be included once:</p>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <div data-memory-button 
+        data-button-text="Button 1"
+        data-button-variant="Ocean Teal">
+      </div>
+      
+      <div data-memory-button 
+        data-button-text="Button 2"
+        data-button-variant="Slate Navy">
+      </div>
+      
+      <div data-memory-button 
+        data-button-text="Button 3"
+        data-button-variant="Warm Sandston">
+      </div>
+    </div>
+  </div>
+  
+  <!-- DEMO 4: Outline Variants -->
+  <div class="demo-section">
+    <h2>4. Outline Variants</h2>
+    <p>All variants also have outline versions:</p>
+    
+    <div class="button-showcase">
+      <div class="button-demo">
+        <h3>Ocean Teal Outline</h3>
+        <div data-memory-button 
+          data-button-text="Outline Style"
+          data-button-variant="Ocean Teal Outline">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Slate Navy Outline</h3>
+        <div data-memory-button 
+          data-button-text="Outline Style"
+          data-button-variant="Slate Navy Outline">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Warm Sandston Outline</h3>
+        <div data-memory-button 
+          data-button-text="Outline Style"
+          data-button-variant="Warm Sandston Outline">
+        </div>
+      </div>
+      
+      <div class="button-demo">
+        <h3>Rustwood Outline</h3>
+        <div data-memory-button 
+          data-button-text="Outline Style"
+          data-button-variant="Rustwood Outline">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Info about auto-detection -->
+  <div class="info">
+    <h3>🔍 How Auto-Detection Works</h3>
+    <p>The embed automatically finds the collection ID from:</p>
+    <ol>
+      <li><code>data-collection-id</code> attribute on the button</li>
+      <li><code>&lt;meta name="memory-form:collection-id"&gt;</code> in the page head</li>
+      <li><code>window.MEMORY_FORM_COLLECTION_ID</code> global variable</li>
+      <li>Server-injected configuration</li>
+    </ol>
+    <p>Check the browser console to see which method was used!</p>
+  </div>
+  
+  <!-- Load the embed (only once!) - is:inline tells Astro not to bundle this -->
+  <script is:inline src="/memory-form/memory-embed.js"></script>
+  
+  <!-- Debug info -->
+  <script is:inline>
+    // Show which collection ID is being used
+    setTimeout(() => {
+      console.group('🔍 Memory Form Debug Info');
+      console.log('Collection ID from window:', window.MEMORY_FORM_COLLECTION_ID);
+      console.log('Collection ID from meta:', document.querySelector('meta[name="memory-form:collection-id"]')?.content);
+      console.log('Embed version:', window.MEMORY_FORM_VERSION);
+      console.groupEnd();
+    }, 1000);
+  </script>
+</body>
+</html>

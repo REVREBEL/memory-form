@@ -1,293 +1,131 @@
 ---
 import MainLayout from '../layouts/main.astro';
+import { MemoryFormWrapper } from '../components/MemoryFormWrapper';
 import { baseUrl } from '../lib/base-url';
+
+// CONFIGURATION:
+// Get collection ID from environment variable
+const COLLECTION_ID = import.meta.env.MEMORY_JOURNAL_COLLECTION_ID;
+
+// Optional: Add your locale ID if using multiple locales
+const LOCALE_ID = undefined; // or 'YOUR_LOCALE_ID_HERE'
 ---
 
 <MainLayout>
-  <div class="min-h-screen bg-background text-foreground">
-    <!-- Hero Section -->
-    <div class="bg-gradient-to-b from-primary/5 to-background border-b border-border">
-      <div class="max-w-4xl mx-auto px-8 py-16">
-        <div class="space-y-6 text-center">
-          <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary border border-primary/20">
-            ✨ Production Ready
-          </div>
-          <h1 class="text-5xl md:text-6xl font-bold font-heading">
-            Guestbook CMS Integration
-          </h1>
-          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A complete integration connecting Webflow-generated form components to the Webflow CMS API
-          </p>
-          <div class="flex gap-4 justify-center pt-4">
-            <a
-              href={`${baseUrl}/guestbook`}
-              class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
-            >
-              🎉 View Demo
-            </a>
-            <a
-              href="#documentation"
-              class="inline-flex items-center gap-2 px-6 py-3 bg-card text-foreground rounded-lg border border-border hover:border-primary transition-colors font-medium"
-            >
-              📚 Documentation
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- Inject collection ID for embed auto-detection -->
+<script is:inline define:vars={{ COLLECTION_ID }}>
+  // Make collection ID available globally for embeds
+  window.MEMORY_FORM_COLLECTION_ID = COLLECTION_ID;
+</script>
 
-    <div class="max-w-4xl mx-auto px-8 py-12 space-y-16">
-      
-      <!-- Features Grid -->
-      <section>
-        <h2 class="text-3xl font-bold mb-8 font-heading">✨ Features</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">🔄</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">Create & Update</h3>
-            <p class="text-muted-foreground">
-              Full CRUD operations for guestbook entries with automatic create/update logic
-            </p>
-          </div>
-          
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">✅</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">Validation</h3>
-            <p class="text-muted-foreground">
-              Client-side validation with user-friendly error messages before submission
-            </p>
-          </div>
-          
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">🎨</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">Webflow Components</h3>
-            <p class="text-muted-foreground">
-              Uses your Devlink-generated components - no custom rewrites needed
-            </p>
-          </div>
-          
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">🌍</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">External Embed</h3>
-            <p class="text-muted-foreground">
-              Can be embedded on pages outside Webflow Cloud with standalone bundle
-            </p>
-          </div>
-          
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">🔐</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">Secure</h3>
-            <p class="text-muted-foreground">
-              API token stays server-side only, all CMS calls through protected routes
-            </p>
-          </div>
-          
-          <div class="p-6 bg-card rounded-lg border border-border">
-            <div class="text-3xl mb-3">📘</div>
-            <h3 class="text-xl font-semibold mb-2 font-heading">Type-Safe</h3>
-            <p class="text-muted-foreground">
-              Full TypeScript support with proper types for all data structures
-            </p>
-          </div>
-        </div>
-      </section>
+<div class="min-h-screen bg-background"> 
+<!-- Hero Section -->
+<section class="relative overflow-hidden">
+<div class="container mx-auto px-4 py-16 md:py-24">
+<div class="max-w-4xl mx-auto text-center">
+<h1 class="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6">
+Memories That Last Forever
+</h1>
+<p class="text-xl md:text-2xl text-muted-foreground mb-8">
+Share your precious moments and create a lasting digital memory journal
+</p>
 
-      <!-- Quick Start -->
-      <section class="bg-muted/50 p-8 rounded-lg border border-border">
-        <h2 class="text-3xl font-bold mb-6 font-heading">🚀 Quick Start</h2>
-        <div class="space-y-6">
-          <div>
-            <div class="flex items-center gap-3 mb-2">
-              <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold">1</span>
-              <h3 class="text-lg font-semibold">Set Environment Variable</h3>
-            </div>
-            <div class="ml-11 bg-card p-4 rounded border border-border">
-              <code class="text-sm">WEBFLOW_CMS_SITE_API_TOKEN=your_token_here</code>
-            </div>
-          </div>
+<!-- Memory Form Button -->
+<div class="flex justify-center">
+<MemoryFormWrapper
+client:only="react"
+collectionId={COLLECTION_ID}
+localeId={LOCALE_ID}
+baseUrl={baseUrl}
+buttonText="Share a Memory"
+buttonVariant="Ocean Teal"
+/>
+</div>
+</div>
+</div>
+</section>
 
-          <div>
-            <div class="flex items-center gap-3 mb-2">
-              <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold">2</span>
-              <h3 class="text-lg font-semibold">Start Dev Server</h3>
-            </div>
-            <div class="ml-11 bg-card p-4 rounded border border-border">
-              <code class="text-sm">npm run dev</code>
-            </div>
-          </div>
+<!-- Features Section -->
+<section class="py-16 bg-muted/50">
+<div class="container mx-auto px-4">
+<div class="max-w-6xl mx-auto">
+<h2 class="text-3xl font-heading font-bold text-center mb-12">
+Preserve Your Special Moments
+</h2>
 
-          <div>
-            <div class="flex items-center gap-3 mb-2">
-              <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold">3</span>
-              <h3 class="text-lg font-semibold">Test the Demo</h3>
-            </div>
-            <div class="ml-11">
-              <a 
-                href={`${baseUrl}/guestbook`}
-                class="inline-block px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
-              >
-                Visit /guestbook →
-              </a>
-            </div>
-          </div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="bg-card rounded-lg p-6 shadow-sm">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-heading font-semibold mb-2">Photos & Videos</h3>
+<p class="text-muted-foreground">
+Upload photos and videos to bring your memories to life
+</p>
+</div>
 
-          <div>
-            <div class="flex items-center gap-3 mb-2">
-              <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold">4</span>
-              <h3 class="text-lg font-semibold">Use in Your Pages</h3>
-            </div>
-            <div class="ml-11 bg-card p-4 rounded border border-border">
-              <pre class="text-sm"><code>&lt;GuestbookButton client:only="react" /&gt;</code></pre>
-            </div>
-          </div>
-        </div>
-      </section>
+<!-- Feature 2 -->
+<div class="bg-card rounded-lg p-6 shadow-sm">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-heading font-semibold mb-2">Tag & Organize</h3>
+<p class="text-muted-foreground">
+Add tags to categorize and easily find your memories later
+</p>
+</div>
 
-      <!-- Documentation -->
-      <section id="documentation">
-        <h2 class="text-3xl font-bold mb-6 font-heading">📚 Documentation</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <a 
-            href="/GUESTBOOK-INDEX.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">📑 Documentation Index</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">Start here - navigation hub for all docs</p>
-          </a>
+<!-- Feature 3 -->
+<div class="bg-card rounded-lg p-6 shadow-sm">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+<svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+</svg>
+</div>
+<h3 class="text-xl font-heading font-semibold mb-2">Capture the Moment</h3>
+<p class="text-muted-foreground">
+Record dates and locations to remember when and where it happened
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-          <a 
-            href="/SETUP-GUIDE.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">🔧 Setup Guide</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">Step-by-step setup instructions</p>
-          </a>
+<!-- CTA Section -->
+<section class="py-16">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center">
+<h2 class="text-3xl font-heading font-bold mb-4">
+Start Your Memory Journal Today
+</h2>
+<p class="text-lg text-muted-foreground mb-8">
+Don't let your precious moments fade away. Share them and keep them alive forever.
+</p>
 
-          <a 
-            href="/QUICK-REFERENCE.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">⚡ Quick Reference</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">Code snippets and examples</p>
-          </a>
-
-          <a 
-            href="/README-GUESTBOOK.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">📖 Feature Docs</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">Complete feature documentation</p>
-          </a>
-
-          <a 
-            href="/ARCHITECTURE-DIAGRAM.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">🏗️ Architecture</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">System architecture and data flow</p>
-          </a>
-
-          <a 
-            href="/TESTING-CHECKLIST.md"
-            target="_blank"
-            class="p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors group"
-          >
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-semibold group-hover:text-primary transition-colors">✅ Testing Guide</h3>
-              <span class="text-muted-foreground">→</span>
-            </div>
-            <p class="text-sm text-muted-foreground">Comprehensive testing checklist</p>
-          </a>
-        </div>
-      </section>
-
-      <!-- Important Note -->
-      <section class="bg-primary/10 border border-primary/20 p-6 rounded-lg">
-        <div class="flex gap-4">
-          <div class="text-2xl">🔑</div>
-          <div>
-            <h3 class="text-lg font-semibold mb-2 text-primary font-heading">
-              Don't Forget Your API Token!
-            </h3>
-            <p class="text-sm mb-3">
-              Make sure you've added your <strong>WEBFLOW_CMS_SITE_API_TOKEN</strong> to the .env file.
-            </p>
-            <p class="text-sm text-muted-foreground">
-              Get it from: Webflow → Site Settings → Apps & Integrations → API Access
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- What's Included -->
-      <section>
-        <h2 class="text-3xl font-bold mb-6 font-heading">📦 What's Included</h2>
-        <div class="space-y-3 text-muted-foreground">
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Full CMS integration (Create & Update)</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Form validation with error messages</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Success feedback with item details</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Modal UI with Webflow components</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>External embed support</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>TypeScript types throughout</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Comprehensive documentation</span>
-          </div>
-          <div class="flex items-start gap-3">
-            <span class="text-green-500 mt-1">✓</span>
-            <span>Testing checklist & examples</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="text-center py-8 border-t border-border">
-        <p class="text-muted-foreground text-sm">
-          Built with ❤️ for Webflow Cloud
-        </p>
-        <p class="text-muted-foreground text-xs mt-2">
-          Ready to use • Production tested • Type-safe
-        </p>
-      </footer>
-
-    </div>
-  </div>
+<MemoryFormWrapper
+client:only="react"
+collectionId={COLLECTION_ID}
+localeId={LOCALE_ID}
+baseUrl={baseUrl}
+buttonText="Get Started"
+buttonVariant="Slate Navy"
+/>
+</div>
+</div>
+</section>
+</div>
 </MainLayout>
+
+<style>
+/* Custom styles for the memory page */
+.container {
+width: 100%;
+max-width: 1280px;
+}
+</style>

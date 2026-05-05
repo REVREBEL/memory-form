@@ -4,31 +4,39 @@ import '../site-components/global.css';
 import '../styles/global.css';
 
 const { pageClass = '' } = Astro.props;
+
+// Get collection ID for meta tag (for embed auto-detection)
+const COLLECTION_ID = import.meta.env.MEMORY_JOURNAL_COLLECTION_ID;
 ---
 
 <html lang="en" class={pageClass}>
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Guestbook Form</title>
-	</head>
-	<!-- Dark mode class injection point - will be replaced with `dark` class based on your site palette -->
-	<body class="__DARK_MODE_CLASS__">
-    <slot />
-  </body>
+<head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/png" href="/favicon.ico" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<title>Memory Form</title>
+
+<!-- Collection ID for embed auto-detection -->
+{COLLECTION_ID && (
+  <meta name="memory-form:collection-id" content={COLLECTION_ID} />
+)}
+</head>
+<!-- Dark mode class injection point - will be replaced with `dark` class based on your site palette -->
+<body class="__DARK_MODE_CLASS__">
+<slot />
+</body>
 </html>
 
 <style is:global>
-  /* Page-specific overrides */
-  html.splash main { 
-    display: flex !important; 
-  }
-  
-  html.splash ol,
-  html.splash ul { 
-    padding-left: 0 !important; 
-    margin: 0 !important; 
-  }
+/* Page-specific overrides */
+html.splash main { 
+display: flex !important; 
+}
+
+html.splash ol,
+html.splash ul { 
+padding-left: 0 !important; 
+margin: 0 !important; 
+}
 </style>

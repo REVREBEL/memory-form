@@ -1,7 +1,7 @@
 {
     "cloud": {
         "framework": "astro",
-        "project_id": "943dd506-ad76-4718-a0f7-37f432f2908e"
+        "project_id": "d3473357-9494-45da-b897-573de61149c5"
     },
     "devlink": {
         "rootDir": "./src/site-components",

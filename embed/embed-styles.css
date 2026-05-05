@@ -1,0 +1,21 @@
+/**
+ * Minimal CSS for Memory Form Embed
+ * 
+ * Only includes what Webflow components actually need:
+ * 1. CSS variables from Webflow design system
+ * 2. Component styles from DevLink
+ * 
+ * Does NOT include:
+ * - Tailwind CSS (not needed - Webflow has its own utilities)
+ * - Radix UI styles (not needed - using pure Webflow components)
+ * - shadcn styles (not needed - using pure Webflow components)
+ */
+
+/* Import Webflow CSS variables only */
+@import '../generated/webflow.css';
+
+/* Import fonts */
+@import '../generated/fonts.css';
+
+/* Import Webflow component styles */
+@import '../src/site-components/global.css';

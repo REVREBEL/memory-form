@@ -16,7 +16,19 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	/**
+	 * R2 Bucket Bindings
+	 * Webflow Cloud provides WEBFLOW_CLOUD_MEDIA for Object Storage
+	 * For local development, you can bind to a local R2 bucket
+	 */
+	"r2_buckets": [
+		{
+			"binding": "WEBFLOW_CLOUD_MEDIA",
+			"bucket_name": "memory-uploads",
+			"preview_bucket_name": "memory-uploads-preview"
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
