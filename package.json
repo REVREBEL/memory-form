@@ -15,7 +15,7 @@
     "cleanup": "rm -rf /tmp/* /var/tmp/* /root/.npm /root/.cache /root/.local /app/lost+found/* /app/dist 2>/dev/null || true && echo 'Cleanup complete!' && df -h / | tail -1"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "12.6.7",
+    "@astrojs/cloudflare": "13.5.0",
     "@astrojs/react": "4.3.0",
     "@hookform/resolvers": "5.2.1",
     "@radix-ui/react-accordion": "1.2.11",
